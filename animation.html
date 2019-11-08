@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>淡出</title>
+	<style type="text/css">
+		#smail {
+			background-image: url(http://ife.baidu.com/2016/static/img/erik_ce204002.jpg);
+			background-repeat: no-repeat;
+			width: 480px;
+			height: 480px;
+			border: 3px solid red;
+		}
+	</style>
+</head>
+<body>
+	<div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+	<button id="fade-btn">淡出</button>
+
+	<!--帧动画笑容-->
+	<div id = "smail">
+		
+	</div>
+	<script type="text/javascript">
+		var fadeObj = document.getElementById("fade-obj");
+		var fadeBtn = document.getElementById("fade-btn");
+		var smail = document.getElementById("smail");
+		var opacity = 1;
+		var offsetY = 0;
+		function danchu() {
+			
+			fadeObj.style.opacity = opacity;
+			opacity -= 0.01;
+			if (opacity > 0) {
+				setTimeout(danchu,100);
+				fadeBtn.disabled = true;
+				console.log(opacity);
+			}else {
+				fadeBtn.disabled = false;
+				fadeBtn.innerHTML = "淡入";
+				fadeBtn.onclick = danru;
+				opacity = 0;
+			}
+		}
+		function danru() {
+			
+			fadeObj.style.opacity = opacity;
+			opacity += 0.01;
+			if(opacity <= 1){
+				setTimeout(danru,100)
+				fadeBtn.disabled = true;
+			}else {
+				fadeBtn.disabled = false;
+				fadeBtn.innerHTML = "淡出";
+				fadeBtn.onclick = danchu;
+				opacity = 1;
+
+			}
+		}
+		fadeBtn.onclick = danchu;
+		function changeSmail() {
+			smail.style.backgroundPositionY = offsetY + "px";
+			offsetY -= 480;
+			if(offsetY <= -7680){
+				offsetY = 0;
+			}
+		}
+		setInterval(changeSmail,100);
+		
+	</script>
+</body>
+</html>
